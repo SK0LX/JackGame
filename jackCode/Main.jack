@@ -2,11 +2,10 @@ class Main {
 
    function void main() 
    {
-      /* Prints some text using the standard library. */
       var Game game;
       let game = Game.new();
       do game.run();
-      do game.dispose();
+      //do game.dispose();
       return;
    }
 }

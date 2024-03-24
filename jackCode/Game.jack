@@ -6,11 +6,10 @@ class Game {
    // 69 = e - exit
    // 96 = ` ???
 
-   field Block block; // the square of this game
+   field Block block;
    field int countBlocks; // counts block
    field int direction; 
 
-   /** Constructs a new Square Game. */
    constructor Game new() {
       let countBlocks = 0;
       return this;
@@ -23,21 +22,22 @@ class Game {
       return;
    }
 
-   /** Moves the square in the current direction. */
+   /** Moves the block in the current direction. */
    method void moveBlock() {
       var char key;
       while (~(key = 32)){
          let key = Keyboard.keyPressed();
          if (direction = 3){
-            if (block.GetX() > 0) { do block.moveLeft(); }
+            if (block.GetX() > 1) { do block.moveLeft(); }
             else { let direction = 4; }
          }
          if (direction = 4){
-            if (block.GetX() < 512) { do block.moveRight(); }
+            if (block.GetX() + block.GetSizeX() < 510) { do block.moveRight(); }
             else { let direction = 3; }
          }
+         do Sys.wait(10);
       }
-      do Sys.wait(5);  // delays the next movement
+      do Sys.wait(100);  // delays the next movement
       return;
    }
 
@@ -45,12 +45,12 @@ class Game {
    method void run() {
       var char key;  // the key currently pressed by the user
 
-      do GameOver.draw();
+      do BlackMenu.draw();
       while (key = 0){
          let key = Keyboard.keyPressed();
          if (key = 80) { 
             do BlackMenu.earse();
-            do ScoreGame.draw(); } // p play
+             do Play(); } // p play
          if (key = 73) {  } // i info
          if (key = 69) 
          { 
@@ -62,6 +62,27 @@ class Game {
    }
 
    method void Play () {
+      var Block mainBlock;
+      var int lastX;
+      var int lastY;
+
+      let mainBlock = Block.new(255, 255);
+      let lastY = mainBlock.GetY() - mainBlock.GetSizeY();
+      do ScoreGame.draw();
+      //do Phone.draw(0);
+
+      do mainBlock.draw(); // main block
+
+      while (true){
+         let block = Block.new(0, lastY);
+         let lastY = block.GetY() - block.GetSizeY();
+         let direction = 3;
+
+         do moveBlock();
+      }
+
+      do Phone.earse();
+      do GameOver.draw();
       return;
    }
 
