@@ -42,7 +42,7 @@ class Block {
 
    /** Moves the square left by 2 pixels. */
    method void moveLeft() { 
-      if (x > 1) {
+      if (x > 150) {
          do earse();
          let x = x - 2;
          do draw();
@@ -52,7 +52,7 @@ class Block {
 
    /** Moves the square right by 2 pixels. */
    method void moveRight() {
-      if ((x + sizeX) < 510) {
+      if ((x + sizeX) < 350) {
          do earse();
          let x = x + 2;
          do draw();

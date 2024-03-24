@@ -9,6 +9,7 @@ class Game {
    field Block block;
    field int countBlocks; // counts block
    field int direction; 
+   field in score;
 
    constructor Game new() {
       let countBlocks = 0;
@@ -28,14 +29,14 @@ class Game {
       while (~(key = 32)){
          let key = Keyboard.keyPressed();
          if (direction = 3){
-            if (block.GetX() > 1) { do block.moveLeft(); }
+            if (block.GetX() > 150) { do block.moveLeft(); }
             else { let direction = 4; }
          }
          if (direction = 4){
-            if (block.GetX() + block.GetSizeX() < 510) { do block.moveRight(); }
+            if (block.GetX() + block.GetSizeX() < 350) { do block.moveRight(); }
             else { let direction = 3; }
          }
-         do Sys.wait(10);
+         do Sys.wait(21 - score);
       }
       do Sys.wait(100);  // delays the next movement
       return;
@@ -63,26 +64,45 @@ class Game {
 
    method void Play () {
       var Block mainBlock;
-      var int lastX;
+      var Block lastBlock;
       var int lastY;
-
+      var int win;
+      var bool Break;
+      var ScoreNoPhone scorePhone;
+      let scorePhone = ScoreNoPhone.new(0);
+      let win = 1;
+      let Break = true;
       let mainBlock = Block.new(255, 255);
       let lastY = mainBlock.GetY() - mainBlock.GetSizeY();
+      let lastBlock = mainBlock;
       do ScoreGame.draw();
       //do Phone.draw(0);
 
       do mainBlock.draw(); // main block
 
-      while (true){
-         let block = Block.new(0, lastY);
+      while (~(win = 20) & Break){
+         let block = Block.new(150, lastY);
          let lastY = block.GetY() - block.GetSizeY();
          let direction = 3;
-
+         let win = win + 1;
+         
          do moveBlock();
-      }
 
-      do Phone.earse();
-      do GameOver.draw();
+         if (block.GetX() < 267 & block.GetX() > 243){
+            do scorePhone.add(1);
+            let score = score + 1;
+            let lastBlock = block;
+         } else{
+            let Break = false;
+         }
+      }
+      if (score = 20){
+         do Phone.earse();
+         do WinPhone.draw();
+      }else{
+         do Phone.earse();
+         do GameOver.draw();
+      }
       return;
    }
 
