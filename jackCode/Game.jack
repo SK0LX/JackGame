@@ -6,15 +6,29 @@ class Game {
    // 69 = e - exit
    // 96 = ` ???
 
+   static int gameFieldLeftBorder;
+   static int gameFieldRightBorder;
+
    field Block block;
-   field int countBlocks; // counts block
-   field int direction; 
-   field in score;
+   field int countBlocks;
+   field int score;
+
+   field int blockX;
+   field int blockY;
 
    constructor Game new() {
       let countBlocks = 0;
+      let score = 0;
+      let gameFieldLeftBorder = 150;
+      let gameFieldRightBorder = 350;
+      let blockX = 255;
+      let blockY = 255;
       return this;
    }
+
+   function int getLeftBorder(){ return gameFieldLeftBorder; }
+
+   function int getRightBorder(){ return gameFieldRightBorder; }
 
    /** Disposes this game. */
    method void dispose() {
@@ -23,90 +37,116 @@ class Game {
       return;
    }
 
-   /** Moves the block in the current direction. */
-   method void moveBlock() {
+   /** Start Game with menu. */
+   method void start(){
       var char key;
-      while (~(key = 32)){
-         let key = Keyboard.keyPressed();
-         if (direction = 3){
-            if (block.GetX() > 150) { do block.moveLeft(); }
-            else { let direction = 4; }
-         }
-         if (direction = 4){
-            if (block.GetX() + block.GetSizeX() < 350) { do block.moveRight(); }
-            else { let direction = 3; }
-         }
-         do Sys.wait(21 - score);
-      }
-      do Sys.wait(100);  // delays the next movement
-      return;
-   }
 
-   /** Runs the game: handles the user's inputs and moves the square accordingly */
-   method void run() {
-      var char key;  // the key currently pressed by the user
-
-      do BlackMenu.draw();
-      while (key = 0){
+      do Screen.clearScreen();
+      do Menu.draw();
+      while (true){
          let key = Keyboard.keyPressed();
-         if (key = 80) { 
-            do BlackMenu.earse();
-             do Play(); } // p play
-         if (key = 73) {  } // i info
+         if (key = 80) 
+         { 
+            do Menu.earse();
+            do run(); 
+         } // p play
+         if (key = 73) 
+         { 
+            do Menu.earse();
+            do getInfo();
+            do Menu.draw();
+          } // i info
          if (key = 69) 
          { 
-            do BlackMenu.earse();
+            do Menu.earse();
             return;
          } // e exit
+         if (key = 96) 
+         {
+            do Easteregg.show();
+            do Menu.draw();
+         } // ` easteregg
       }
       return;
    }
 
-   method void Play () {
-      var Block mainBlock;
-      var Block lastBlock;
+   /** Move block left and then right while space is not pressed*/
+   method void moveBlock() {
+      var char key;
+      while (~(key = 32)){ // space
+         let key = Keyboard.keyPressed();
+         do block.move();
+         do Sys.wait(21 - score);
+      }
+      do Sys.wait(100);  // delays the next press the space
+      return;
+   }
+
+   /** Runs the game: building a tower */
+   method void run () {
       var int lastY;
-      var int win;
-      var bool Break;
-      var ScoreNoPhone scorePhone;
-      let scorePhone = ScoreNoPhone.new(0);
-      let win = 1;
-      let Break = true;
-      let mainBlock = Block.new(255, 255);
-      let lastY = mainBlock.GetY() - mainBlock.GetSizeY();
-      let lastBlock = mainBlock;
+      var int lastX;
+      var bool break;
+      var char key;
+      let break = true;
+      let block = Block.new(blockX, blockY);
+      let lastY = block.getY() - block.getSizeY();
+      let lastX = block.getX();
       do ScoreGame.draw();
-      //do Phone.draw(0);
+      do Phone.draw(0);
 
-      do mainBlock.draw(); // main block
+      do block.draw(); // first block
 
-      while (~(win = 20) & Break){
-         let block = Block.new(150, lastY);
-         let lastY = block.GetY() - block.GetSizeY();
-         let direction = 3;
-         let win = win + 1;
-         
+      while (~(countBlocks = 20) & break){
+         let block = Block.new(gameFieldLeftBorder, lastY);
          do moveBlock();
 
-         if (block.GetX() < 267 & block.GetX() > 243){
-            do scorePhone.add(1);
+         let countBlocks = countBlocks + 1;
+         let lastY = block.getY() - block.getSizeY();
+
+         if (block.getX() < (blockX + block.getSizeX()) & block.getX() > (blockX - block.getSizeX())){
             let score = score + 1;
-            let lastBlock = block;
-         } else{
-            let Break = false;
-         }
+            if (block.getX() = lastX){ let score = score + 2; } // bonus for perfect block
+            let lastX = block.getX();
+
+            do Output.moveCursor(1, 2);
+            do Output.printInt(score);
+         } 
+         else { let break = false; }
       }
-      if (score = 20){
+
+      if (score > 16){
          do Phone.earse();
          do WinPhone.draw();
-      }else{
+      }
+      else{
          do Phone.earse();
-         do GameOver.draw();
+         do GameOver.draw();  
       }
       return;
    }
 
-   method void GetInfo () {
+   method void getInfo () {
+      var char key;
+      do Info.draw(0);
+      while (true){
+         let key = Keyboard.keyPressed();
+         if (key = 80) 
+         { 
+            do Info.earse();
+            do run(); 
+         } // p play
+         if (key = 73) 
+         { 
+            do Info.earse();
+            return;
+          } // i info
+         if (key = 96) 
+         {
+            do Easteregg.show();
+            do Info.draw();
+         } // ` easteregg
+      }
       return;
    }
 }

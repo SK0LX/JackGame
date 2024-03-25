@@ -4,6 +4,7 @@ class Block {
    field int y; 
    field int sizeX;
    field int sizeY;
+   field int direction;
 
    constructor Block new(int Ax, int Ay) 
    {
@@ -11,6 +12,7 @@ class Block {
       let y = Ay;
       let sizeX = 12;
       let sizeY = 12;
+      let direction = 1;
       return this;
    }
 
@@ -20,61 +22,41 @@ class Block {
       return;
    }
 
-   /** Moves the square up by 2 pixels. */
-   method void moveUp() {
-      if (y > 1) {
-         do earse();
-         let y = y - 2;
-         do draw();
-      }
-      return;
-   }
-
-   /** Moves the square down by 2 pixels. */
-   method void moveDown() {
-      if ((y + sizeY) < 254) {
-         do earse();
-         let y = y + 2;
-         do draw();
-      }
+   method void move() {
+      if (direction = 1){ do moveRight(); }
+      if (direction = 2){ do moveLeft(); }
       return;
    }
 
    /** Moves the square left by 2 pixels. */
    method void moveLeft() { 
-      if (x > 150) {
+      if (x > Game.getLeftBorder()) {
          do earse();
          let x = x - 2;
          do draw();
       }
+      else { let direction = 1; }
       return;
    }
 
    /** Moves the square right by 2 pixels. */
    method void moveRight() {
-      if ((x + sizeX) < 350) {
+      if ((x + sizeX) < Game.getRightBorder()) {
          do earse();
          let x = x + 2;
          do draw();
       }
+      else { let direction = 2; }
       return;
    }
 
-   method int GetX () {
-      return x;
-   }
+   method int getX () { return x; }
 
-   method int GetY () {
-      return y;
-   }
+   method int getY () { return y; }
 
-   method int GetSizeX () {
-      return sizeX;
-   }
+   method int getSizeX () { return sizeX; }
 
-   method int GetSizeY () {
-      return sizeY;
-   }
+   method int getSizeY () { return sizeY; }
 
    method void draw() {
       do Screen.setColor(true);

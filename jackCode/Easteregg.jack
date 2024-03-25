@@ -1,0 +1,102 @@
+class Easteregg{
+    function void draw(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress +64, 28672);
+        do Memory.poke(memAddress +96, -10240);
+        do Memory.poke(memAddress +128, -6144);
+        do Memory.poke(memAddress +160, -2048);
+        do Memory.poke(memAddress +192, -4096);
+        do Memory.poke(memAddress +224, -8192);
+        do Memory.poke(memAddress +256, -16384);
+        do Memory.poke(memAddress +288, ~32767);
+        do Memory.poke(memAddress +320, 0);
+        do Memory.poke(memAddress +352, 4160);
+        do Memory.poke(memAddress +384, -26560);
+        do Memory.poke(memAddress +416, -27152);
+        do Memory.poke(memAddress +448, -28608);
+        do Memory.poke(memAddress +480, -28608);
+        do Memory.poke(memAddress +512, 15360);
+        do Memory.poke(memAddress +544, 0);
+        do Memory.poke(memAddress +576, 0);
+        do Memory.poke(memAddress +608, 80);
+        do Memory.poke(memAddress +640, 48);
+        do Memory.poke(memAddress +672, 80);
+        do Memory.poke(memAddress +704, 80);
+        do Memory.poke(memAddress +736, 0);
+        do Memory.poke(memAddress +768, -29104);
+        do Memory.poke(memAddress +800, 19024);
+        do Memory.poke(memAddress +832, 19040);
+        do Memory.poke(memAddress +864, -12736);
+        do Memory.poke(memAddress +896, 20848);
+        // column 1
+        do Memory.poke(memAddress +1, 4096);
+        do Memory.poke(memAddress +33, 10240);
+        do Memory.poke(memAddress +65, -14329);
+        do Memory.poke(memAddress +97, 1039);
+        do Memory.poke(memAddress +129, 1039);
+        do Memory.poke(memAddress +161, 527);
+        do Memory.poke(memAddress +193, -28153);
+        do Memory.poke(memAddress +225, 16899);
+        do Memory.poke(memAddress +257, 257);
+        do Memory.poke(memAddress +289, 256);
+        do Memory.poke(memAddress +321, 256);
+        do Memory.poke(memAddress +353, 259);
+        do Memory.poke(memAddress +385, 132);
+        do Memory.poke(memAddress +417, 132);
+        do Memory.poke(memAddress +449, 132);
+        do Memory.poke(memAddress +481, 132);
+        do Memory.poke(memAddress +513, 131);
+        do Memory.poke(memAddress +545, 2176);
+        do Memory.poke(memAddress +577, 10368);
+        do Memory.poke(memAddress +609, 10496);
+        do Memory.poke(memAddress +641, -4608);
+        do Memory.poke(memAddress +673, 14336);
+        do Memory.poke(memAddress +705, 0);
+        do Memory.poke(memAddress +737, 0);
+        do Memory.poke(memAddress +769, 585);
+        do Memory.poke(memAddress +801, 1354);
+        do Memory.poke(memAddress +833, 1906);
+        do Memory.poke(memAddress +865, 323);
+        do Memory.poke(memAddress +897, 1602);
+        // column 2
+        do Memory.poke(memAddress +2, 4);
+        do Memory.poke(memAddress +34, 10);
+        do Memory.poke(memAddress +66, 9);
+        do Memory.poke(memAddress +98, 16);
+        do Memory.poke(memAddress +130, 16);
+        do Memory.poke(memAddress +162, 32);
+        do Memory.poke(memAddress +194, 36);
+        do Memory.poke(memAddress +226, 33);
+        do Memory.poke(memAddress +258, 64);
+        do Memory.poke(memAddress +290, 64);
+        do Memory.poke(memAddress +322, 64);
+        do Memory.poke(memAddress +354, 64);
+        do Memory.poke(memAddress +386, 128);
+        do Memory.poke(memAddress +418, 128);
+        do Memory.poke(memAddress +450, 3200);
+        do Memory.poke(memAddress +482, 4736);
+        do Memory.poke(memAddress +514, 5248);
+        do Memory.poke(memAddress +546, 5256);
+        do Memory.poke(memAddress +578, 5002);
+        do Memory.poke(memAddress +610, 2122);
+        do Memory.poke(memAddress +642, 2043);
+        do Memory.poke(memAddress +674, 14);
+        do Memory.poke(memAddress +706, 0);
+        do Memory.poke(memAddress +738, 0);
+        do Memory.poke(memAddress +770, 0);
+        return;
+    }
+
+    function void show(){
+        do Screen.clearScreen();
+        do Sys.wait(50);
+        do Easteregg.draw(4*32 + 100);
+        do Output.moveCursor(10,0);
+        do Output.printString("waits some time and you'll be back :D");
+        do Sys.wait(500);
+        do Screen.clearScreen();
+        return;
+    }
+}

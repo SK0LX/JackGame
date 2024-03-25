@@ -1,7 +1,7 @@
 class ScoreGame{
   function void draw() {
     var int memAddress; 
-    let memAddress = 16384+700;
+    let memAddress = 16384;
     // column 0
     do Memory.poke(memAddress, 16191);
     do Memory.poke(memAddress +32, 16191);
@@ -13,25 +13,6 @@ class ScoreGame{
     do Memory.poke(memAddress +224, 816);
     do Memory.poke(memAddress +256, 16191);
     do Memory.poke(memAddress +288, 16191);
-    do Memory.poke(memAddress +384, -1);
-    do Memory.poke(memAddress +416, 1);
-    do Memory.poke(memAddress +448, 1);
-    do Memory.poke(memAddress +480, 1);
-    do Memory.poke(memAddress +512, 1);
-    do Memory.poke(memAddress +544, 1);
-    do Memory.poke(memAddress +576, 1);
-    do Memory.poke(memAddress +608, 1);
-    do Memory.poke(memAddress +640, 1);
-    do Memory.poke(memAddress +672, 1);
-    do Memory.poke(memAddress +704, 1);
-    do Memory.poke(memAddress +736, 1);
-    do Memory.poke(memAddress +768, 1);
-    do Memory.poke(memAddress +800, 1);
-    do Memory.poke(memAddress +832, 1);
-    do Memory.poke(memAddress +864, 1);
-    do Memory.poke(memAddress +896, 1);
-    do Memory.poke(memAddress +928, 1);
-    do Memory.poke(memAddress +960, -1);
     // column 1
     do Memory.poke(memAddress +1, 16191);
     do Memory.poke(memAddress +33, 16191);
@@ -39,42 +20,21 @@ class ScoreGame{
     do Memory.poke(memAddress +97, 13107);
     do Memory.poke(memAddress +129, 16179);
     do Memory.poke(memAddress +161, 16179);
-    do Memory.poke(memAddress +193, 6963);
-    do Memory.poke(memAddress +225, 6963);
-    do Memory.poke(memAddress +257, 13119);
+    do Memory.poke(memAddress +193, 819);
+    do Memory.poke(memAddress +225, 3891);
+    do Memory.poke(memAddress +257, 16191);
     do Memory.poke(memAddress +289, 13119);
-    do Memory.poke(memAddress +385, -1);
-    do Memory.poke(memAddress +961, -1);
     // column 2
     do Memory.poke(memAddress +2, 63);
     do Memory.poke(memAddress +34, 63);
-    do Memory.poke(memAddress +66, 3);
-    do Memory.poke(memAddress +98, 3);
+    do Memory.poke(memAddress +66, 3075);
+    do Memory.poke(memAddress +98, 3075);
     do Memory.poke(memAddress +130, 15);
     do Memory.poke(memAddress +162, 15);
-    do Memory.poke(memAddress +194, 3);
-    do Memory.poke(memAddress +226, 3);
+    do Memory.poke(memAddress +194, 3075);
+    do Memory.poke(memAddress +226, 3075);
     do Memory.poke(memAddress +258, 63);
     do Memory.poke(memAddress +290, 63);
-    do Memory.poke(memAddress +386, 63);
-    do Memory.poke(memAddress +418, 32);
-    do Memory.poke(memAddress +450, 32);
-    do Memory.poke(memAddress +482, 32);
-    do Memory.poke(memAddress +514, 32);
-    do Memory.poke(memAddress +546, 32);
-    do Memory.poke(memAddress +578, 32);
-    do Memory.poke(memAddress +610, 32);
-    do Memory.poke(memAddress +642, 32);
-    do Memory.poke(memAddress +674, 32);
-    do Memory.poke(memAddress +706, 32);
-    do Memory.poke(memAddress +738, 32);
-    do Memory.poke(memAddress +770, 32);
-    do Memory.poke(memAddress +802, 32);
-    do Memory.poke(memAddress +834, 32);
-    do Memory.poke(memAddress +866, 32);
-    do Memory.poke(memAddress +898, 32);
-    do Memory.poke(memAddress +930, 32);
-    do Memory.poke(memAddress +962, 63);
     return;
   }
 
@@ -85,5 +45,11 @@ class ScoreGame{
       let memAddress = 16384;
       do Screen.drawRectangle(0,0,511,255);
       return;
+  }
+
+  function void drawScore(int score){
+    //do Output.moveCursor(10, 30);
+    //do Output.printInt(score);
+    return;
   }
 }

@@ -1,5 +1,5 @@
 function Block.new 0
-push constant 4
+push constant 5
 call Memory.alloc 1
 pop pointer 0
 push argument 0
@@ -10,6 +10,8 @@ push constant 12
 pop this 2
 push constant 12
 pop this 3
+push constant 1
+pop this 4
 push pointer 0
 return
 function Block.dispose 0
@@ -20,57 +22,36 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-function Block.moveUp 0
+function Block.move 0
 push argument 0
 pop pointer 0
-push this 1
+push this 4
 push constant 1
-gt
+eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
 push pointer 0
-call Block.earse 1
-pop temp 0
-push this 1
-push constant 2
-sub
-pop this 1
-push pointer 0
-call Block.draw 1
+call Block.moveRight 1
 pop temp 0
 label IF_FALSE0
-push constant 0
-return
-function Block.moveDown 0
-push argument 0
-pop pointer 0
-push this 1
-push this 3
-add
-push constant 254
-lt
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-push pointer 0
-call Block.earse 1
-pop temp 0
-push this 1
+push this 4
 push constant 2
-add
-pop this 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push pointer 0
-call Block.draw 1
+call Block.moveLeft 1
 pop temp 0
-label IF_FALSE0
+label IF_FALSE1
 push constant 0
 return
 function Block.moveLeft 0
 push argument 0
 pop pointer 0
 push this 0
-push constant 150
+call Game.getLeftBorder 0
 gt
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -85,7 +66,11 @@ pop this 0
 push pointer 0
 call Block.draw 1
 pop temp 0
+goto IF_END0
 label IF_FALSE0
+push constant 1
+pop this 4
+label IF_END0
 push constant 0
 return
 function Block.moveRight 0
@@ -94,7 +79,7 @@ pop pointer 0
 push this 0
 push this 2
 add
-push constant 350
+call Game.getRightBorder 0
 lt
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -109,25 +94,29 @@ pop this 0
 push pointer 0
 call Block.draw 1
 pop temp 0
+goto IF_END0
 label IF_FALSE0
+push constant 2
+pop this 4
+label IF_END0
 push constant 0
 return
-function Block.GetX 0
+function Block.getX 0
 push argument 0
 pop pointer 0
 push this 0
 return
-function Block.GetY 0
+function Block.getY 0
 push argument 0
 pop pointer 0
 push this 1
 return
-function Block.GetSizeX 0
+function Block.getSizeX 0
 push argument 0
 pop pointer 0
 push this 2
 return
-function Block.GetSizeY 0
+function Block.getSizeY 0
 push argument 0
 pop pointer 0
 push this 3
