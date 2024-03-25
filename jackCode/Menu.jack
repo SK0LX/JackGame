@@ -3,7 +3,7 @@ class Menu{
     function void draw() 
     {
         var int memAddress; 
-        let memAddress = 16384;
+        let memAddress = 16384 + 4236;
         // column 0
         do Memory.poke(memAddress, -1538);
         do Memory.poke(memAddress +32, -1538);

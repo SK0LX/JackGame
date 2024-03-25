@@ -1,8 +1,8 @@
 class Info{
     
-    function void draw(int location) {
+    function void draw() {
         var int memAddress; 
-        let memAddress = 16384+location;
+        let memAddress = 16384+4236;
         // column 0
         do Memory.poke(memAddress, -1);
         do Memory.poke(memAddress +32, 1);

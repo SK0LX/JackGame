@@ -88,6 +88,8 @@ class Game {
       var int lastX;
       var bool break;
       var char key;
+      let score = 0;
+      let countBlocks = 0;
       let break = true;
       let block = Block.new(blockX, blockY);
       let lastY = block.getY() - block.getSizeY();
@@ -123,6 +125,9 @@ class Game {
          do Phone.earse();
          do GameOver.draw();  
       }
+      do Sys.wait(500);
+      do Phone.earse();
+      do Menu.draw();
       return;
    }
 
