@@ -125,7 +125,7 @@ class Game {
          do Phone.earse();
          do GameOver.draw();  
       }
-      do Sys.wait(500);
+      do Sys.wait(1000);
       do Phone.earse();
       do Menu.draw();
       return;
