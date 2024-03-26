@@ -46,10 +46,4 @@ class ScoreGame{
       do Screen.drawRectangle(0,0,511,255);
       return;
   }
-
-  function void drawScore(int score){
-    //do Output.moveCursor(10, 30);
-    //do Output.printInt(score);
-    return;
-  }
 }
