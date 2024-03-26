@@ -1,5 +1,5 @@
 class Phone{
-    function void draw(int location) {
+    function void draw() {
         do Phone.drawCloud(30*32 + 600);
         do Phone.drawCloud(60*32 + 162); // справа близко к полю игры
         
