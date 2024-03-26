@@ -1,5 +1,7 @@
 function Menu.draw 1
 push constant 16384
+push constant 4236
+add
 pop local 0
 push local 0
 push constant 1538

@@ -130,6 +130,10 @@ function Game.run 4
 push argument 0
 pop pointer 0
 push constant 0
+pop this 2
+push constant 0
+pop this 1
+push constant 0
 not
 pop local 2
 push this 3
@@ -247,6 +251,13 @@ pop temp 0
 call GameOver.draw 0
 pop temp 0
 label IF_END2
+push constant 1000
+call Sys.wait 1
+pop temp 0
+call Phone.earse 0
+pop temp 0
+call Menu.draw 0
+pop temp 0
 push constant 0
 return
 function Game.getInfo 1

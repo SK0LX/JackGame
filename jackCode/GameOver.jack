@@ -1,7 +1,7 @@
 class GameOver{
     function void draw() {
         var int memAddress; 
-        let memAddress = 16384+3860;
+        let memAddress = 16384+4138;
         // column 0
         do Memory.poke(memAddress, 16128);
         do Memory.poke(memAddress +32, 16576);
