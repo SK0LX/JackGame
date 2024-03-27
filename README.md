@@ -19,4 +19,4 @@ Let's see if you can finish it :smirk:
 
 ### **Installation**
 1. Clone the repository: git clone https://github.com/SK0LX/JackGame.git
-2. Launch app using n2t JVM server
+2. Launch app using n2t JVM server 
