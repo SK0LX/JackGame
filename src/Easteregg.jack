@@ -1,7 +1,7 @@
 class Easteregg{
-    function void draw() {
+    function void draw(int location) {
         var int memAddress; 
-        let memAddress = 16384+4236;
+        let memAddress = 16384 + location;
         // column 0
         do Memory.poke(memAddress +64, 28672);
         do Memory.poke(memAddress +96, -10240);
@@ -89,10 +89,10 @@ class Easteregg{
         return;
     }
 
-    function void show(){
+    function void show(int location){
         do Screen.clearScreen();
         do Sys.wait(50);
-        do Easteregg.draw(4*32 + 100);
+        do Easteregg.draw(location);
         do Output.moveCursor(10,0);
         do Output.printString("waits some time and you'll be back :D");
         do Sys.wait(500);

@@ -4,25 +4,31 @@ class Game {
    // 80 = p - play
    // 73 = i - info
    // 69 = e - exit
-   // 96 = ` ???
+   // 96 = ` - easteregg
 
    static int gameFieldLeftBorder;
    static int gameFieldRightBorder;
+   static int locationToDraw;
+
+   field int score;
+   field int countBlocks;
 
    field Block block;
-   field int countBlocks;
-   field int score;
 
    field int blockX;
    field int blockY;
 
    constructor Game new() {
-      let countBlocks = 0;
-      let score = 0;
       let gameFieldLeftBorder = 150;
       let gameFieldRightBorder = 350;
+      let locationToDraw = 4236;
+
+      let score = 0;
+      let countBlocks = 0;
+
       let blockX = 255;
       let blockY = 255;
+
       return this;
    }
 
@@ -32,7 +38,6 @@ class Game {
 
    /** Disposes this game. */
    method void dispose() {
-      do block.dispose();
       do Memory.deAlloc(this);
       return;
    }
@@ -42,8 +47,9 @@ class Game {
       var char key;
 
       do Screen.clearScreen();
-      do Menu.draw();
+      do Menu.draw(locationToDraw);
       while (true){
+         do Sys.wait(60);
          let key = Keyboard.keyPressed();
          if (key = 80) 
          { 
@@ -54,8 +60,9 @@ class Game {
          { 
             do Menu.earse();
             do getInfo();
-            do Menu.draw();
-          } // i info
+            do Menu.draw(locationToDraw);
+            do Sys.wait(200);
+         } // i info
          if (key = 69) 
          { 
             do Menu.earse();
@@ -63,8 +70,8 @@ class Game {
          } // e exit
          if (key = 96) 
          {
-            do Easteregg.show();
-            do Menu.draw();
+            do Easteregg.show(locationToDraw);
+            do Menu.draw(locationToDraw);
          } // ` easteregg
       }
       return;
@@ -86,20 +93,24 @@ class Game {
    method void run () {
       var int lastY;
       var int lastX;
-      var bool break;
+      var bool notBreak;
       var char key;
+      var int countBlocks;
+      
       let score = 0;
       let countBlocks = 0;
-      let break = true;
+
+      let notBreak = true;
       let block = Block.new(blockX, blockY);
       let lastY = block.getY() - block.getSizeY();
       let lastX = block.getX();
-      do ScoreGame.draw();
-      do Phone.draw(0);
 
+      do ScoreGame.draw();
+      do Phone.draw();
       do block.draw(); // first block
 
-      while (~(countBlocks = 20) & break){
+      while (~(countBlocks = 20) & notBreak){
+         do block.dispose();
          let block = Block.new(gameFieldLeftBorder, lastY);
          do moveBlock();
 
@@ -114,42 +125,46 @@ class Game {
             do Output.moveCursor(1, 2);
             do Output.printInt(score);
          } 
-         else { let break = false; }
+         else { let notBreak = false; }
       }
 
       if (score > 16){
          do Phone.earse();
-         do WinPhone.draw();
+         do WinPhone.draw(locationToDraw);
       }
       else{
          do Phone.earse();
-         do GameOver.draw();  
+         do GameOver.draw(locationToDraw - 2);  
       }
-      do Sys.wait(1000);
+      do Sys.wait(1200);
+      do block.dispose();
       do Phone.earse();
-      do Menu.draw();
+      do Menu.draw(locationToDraw);
       return;
    }
 
    method void getInfo () {
       var char key;
-      do Info.draw(0);
+      do Sys.wait(100);
+      do Info.draw(locationToDraw);
       while (true){
+         do Sys.wait(20);
          let key = Keyboard.keyPressed();
          if (key = 80) 
          { 
             do Info.earse();
-            do run(); 
+            do run();
+            return;
          } // p play
          if (key = 73) 
          { 
             do Info.earse();
             return;
-          } // i info
+          } // i go back
          if (key = 96) 
          {
-            do Easteregg.show();
-            do Info.draw();
+            do Easteregg.show(locationToDraw);
+            do Info.draw(locationToDraw);
          } // ` easteregg
       }
       return;

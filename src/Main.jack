@@ -5,7 +5,7 @@ class Main {
       var Game game;
       let game = Game.new();
       do game.start();
-      //do game.dispose();
+      do game.dispose();
       return;
    }
 }

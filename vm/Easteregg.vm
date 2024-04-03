@@ -1,6 +1,6 @@
 function Easteregg.draw 1
 push constant 16384
-push constant 4236
+push argument 0
 add
 pop local 0
 push local 0
@@ -513,11 +513,7 @@ pop temp 0
 push constant 50
 call Sys.wait 1
 pop temp 0
-push constant 4
-push constant 32
-call Math.multiply 2
-push constant 100
-add
+push argument 0
 call Easteregg.draw 1
 pop temp 0
 push constant 10
